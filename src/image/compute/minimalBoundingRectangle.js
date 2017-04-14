@@ -17,7 +17,7 @@ export default function minimalBoundingRectangle(options = {}) {
     let mbr;
 
 
-    for (let i = 0; i < p.length; i++) {
+    for (let i = 4; i < 5; i++) {
         let angle = getAngle(originalPoints[i], originalPoints[(i + 1) % p.length]);
 
         rotate(-angle, originalPoints, p);
@@ -57,6 +57,7 @@ export default function minimalBoundingRectangle(options = {}) {
         let pMax = [aX + tMax * (bX - aX), aY + tMax * (bY - aY)];
 
         let currentSurface = maxWidth * getDistance(pMin, pMax);
+
         if (currentSurface < minSurface) {
             minSurfaceAngle = angle;
             minSurface = currentSurface;
