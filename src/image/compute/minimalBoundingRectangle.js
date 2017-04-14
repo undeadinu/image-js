@@ -17,9 +17,9 @@ export default function minimalBoundingRectangle(options = {}) {
     let mbr;
 
 
-    for (let i = 4; i < 5; i++) {
+    for (let i = 0; i < p.length; i++) {
         let angle = getAngle(originalPoints[i], originalPoints[(i + 1) % p.length]);
-
+console.log(originalPoints[i], originalPoints[(i + 1) % p.length], angle/Math.PI*180);
         rotate(-angle, originalPoints, p);
 
         // console.log('Using the vector: ', originalPoints[i],  originalPoints[(i + 1) % p.length], 'angle', angle);
@@ -31,12 +31,14 @@ export default function minimalBoundingRectangle(options = {}) {
         let aY = p[i][1];
         let bX = p[(i + 1) % p.length][0];
         let bY = p[(i + 1) % p.length][1];
+        console.log(aX, aY, bX, bY);
 
         let tUndefined = true;
         let tMin = 0;
         let tMax = 0;
         let maxWidth = 0;
         for (let j = 0; j < p.length; j++) {
+
             let cX = p[j][0];
             let cY = p[j][1];
             let power = (bX - aX) ** 2 + (bY - aY) ** 2;
@@ -87,7 +89,10 @@ function getDiff(p1, p2) {
 function getAngle(p1, p2) {
     let diff = getDiff(p2, p1);
     let vector = norm(diff);
-    return Math.acos((vector[0]));
+    console.log('--------------',vector[0])
+    let angle=Math.acos((vector[0]));
+    if (vector[1]<0) return -angle;
+    return angle;
 }
 
 
